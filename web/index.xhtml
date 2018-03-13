@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head id="head"> <title>Backward and Forward Chaining</title> </h:head>
+    <h:body>
+        <h1>Backward and Forward Chaining</h1>
+        <h:form id="myForm">
+            <h:outputLabel for="chainingType">Chaining Type: </h:outputLabel>
+            <h:inputText placeholder="Enter chaining type" required="true"
+                   id="chainingType" value="#{data.chainingType}"/>
+
+            <br/>
+
+            <h:outputLabel for="goal">Goal: </h:outputLabel>
+            <h:inputText placeholder="Enter goal" required="true"
+                   id="goal" value="#{data.goal}"/>
+
+            <br/>
+
+            <h:outputLabel for="facts">Facts: </h:outputLabel>
+            <h:inputText placeholder="Enter facts" required="true"
+                   id="facts"/>
+
+            <br/>
+
+            Result: #{data.facts}
+
+            <br/>
+
+            <h:button actionListener="#{data.formFacts}" value="Submit"/>
+
+            <h:button outcome="result" value="Show result"/>
+
+        </h:form>
+    </h:body>
+</html>
