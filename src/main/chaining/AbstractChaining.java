@@ -1,8 +1,11 @@
-package main;
+package main.chaining;
+
+import main.data.Data;
+import main.data.Result;
+import main.data.Trace;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
@@ -15,7 +18,7 @@ import java.util.List;
 public class AbstractChaining implements Serializable {
 
     @XmlTransient
-    protected static String NL = System.getProperty("line.separator");
+    private static String NL = System.getProperty("line.separator");
 
     @XmlTransient
     private List<String> facts;

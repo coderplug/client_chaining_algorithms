@@ -5,7 +5,7 @@
     http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
     <!--<managed-bean>
         <managed-bean-name>RESTClient</managed-bean-name>
-        <managed-bean-class>main.RESTClient</managed-bean-class>
+        <managed-bean-class>main.client.RESTClient</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>-->
 </faces-config>

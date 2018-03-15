@@ -1,4 +1,4 @@
-package main;
+package main.data;
 
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
@@ -26,7 +26,7 @@ public class Result implements Serializable {
         this.goalReached = goalReached;
         this.ruleSequence = ruleSequence;
         this.data = data;
-    };
+    }
 
     @Override
     public String toString() {

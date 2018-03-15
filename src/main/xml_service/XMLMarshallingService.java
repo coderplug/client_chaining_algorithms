@@ -1,4 +1,7 @@
-package main;
+package main.xml_service;
+
+import main.chaining.AbstractChaining;
+import main.data.Data;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -18,18 +21,28 @@ public class XMLMarshallingService {
         try {
             // create context with ":" separated list of packages that
             // contain your JAXB ObjectFactory classes
-            jaxbContext = JAXBContext.newInstance("main.Data", main.Data.class.getClassLoader());
+            jaxbContext = JAXBContext.newInstance("main.data.Data", Data.class.getClassLoader());
         } catch (Exception e) {
             throw new IllegalStateException(e);
         }
     }
 
-    public JAXBElement<?> unmarshal(String xmlString) {
+    public XMLMarshallingService(Class<?> objectClass) {
+        try {
+            // create context with ":" separated list of packages that
+            // contain your JAXB ObjectFactory classes
+            jaxbContext = JAXBContext.newInstance(objectClass);
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    public Object unmarshal(String xmlString) {
         try {
             // Unmarshallers are not thread-safe.  Create a new one every time.
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-            XMLStreamReader reader = XMLInputFactory.newInstance().createXMLStreamReader(new StringReader(xmlString));
-            return unmarshaller.unmarshal(reader, main.AbstractChaining.class);
+            StringReader reader = new StringReader(xmlString);
+            return unmarshaller.unmarshal(reader);
         } catch (Exception e) {
             throw new IllegalStateException(e);
         }

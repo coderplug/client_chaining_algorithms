@@ -1,38 +1,45 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:jsf="http://xmlns.jcp.org/jsf"
-      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-    <h:head id="head"> <title>Backward and Forward Chaining</title> </h:head>
-    <h:body>
-        <h1>Backward and Forward Chaining</h1>
-        <h:form id="myForm">
-            <h:outputLabel for="chainingType">Chaining Type: </h:outputLabel>
-            <h:inputText placeholder="Enter chaining type" required="true"
-                   id="chainingType" value="#{data.chainingType}"/>
+<h:head><title>Chaining algorithms</title></h:head>
+<h:body>
+    <h1>Chaining algorithms</h1>
+    <p:tooltip />
+    <f:view transient="true">
+        <h:form id="dataForm">
+            <h:panelGrid id="grid" columns="3">
 
-            <br/>
+                <p:outputLabel for="chaining" value="Chaining" />
+                <p:selectOneMenu id="chaining" value="#{data.chainingType}" required="true" style="width:125px">
+                    <f:selectItem itemLabel="Forward" itemValue="forward" />
+                    <f:selectItem itemLabel="Backward" itemValue="backward" />
+                </p:selectOneMenu>
+                <p:message for="chaining" display="icon" />
 
-            <h:outputLabel for="goal">Goal: </h:outputLabel>
-            <h:inputText placeholder="Enter goal" required="true"
-                   id="goal" value="#{data.goal}"/>
 
-            <br/>
+                <p:outputLabel for="goal" value="Goal"/>
+                <p:inputText id="goal" value="#{data.goal}"
+                             required="true" p:type="text"
+                             p:placeholder="Enter goal"/>
+                <p:message for="goal" display="icon" />
 
-            <h:outputLabel for="facts">Facts: </h:outputLabel>
-            <h:inputText placeholder="Enter facts" required="true"
-                   id="facts"/>
 
-            <br/>
+                <p:outputLabel for="facts" value="Facts"/>
+                <p:inputText id="facts" type="text" required="true"
+                              placeholder="Enter facts (use ',')" value="#{data.factsString}"/>
+                <p:message for="facts" display="icon" />
 
-            Result: #{data.facts}
+            </h:panelGrid>
 
-            <br/>
+            <p:commandButton update="grid" onclick="p('resultPanel').show()" actionListener="#{data.formFacts()}" value="Retrieve result"/>
 
-            <h:button actionListener="#{data.formFacts}" value="Submit"/>
-
-            <h:button outcome="result" value="Show result"/>
+            <h:panelGrid id="resultPanel" rendered="#{data.factsFormed}">
+                <p:inputTextarea name="requestResult" id="requestResult" rows="6" cols="50" readonly="true" value="#{rESTClient.sendPOSTRequest(data)}" />
+            </h:panelGrid>
 
         </h:form>
-    </h:body>
+    </f:view>
+</h:body>
 </html>
