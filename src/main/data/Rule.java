@@ -12,8 +12,8 @@ public class Rule {
 
     @XmlElementWrapper(name = "antecedents")
     @XmlElement(name = "antecedent")
-    private List<String> antecedents;
-    private int number;
+    private List<Antecedent> antecedents;
+    private int id;
     private Boolean flag1;
     private Boolean flag2;
 
@@ -22,10 +22,10 @@ public class Rule {
         antecedents = new LinkedList<>();
     }
 
-    public Rule(String consequent, List<String> antecedents, int number) {
+    public Rule(String consequent, List<Antecedent> antecedents, int id) {
         this.consequent = consequent;
         this.antecedents = new LinkedList<>(antecedents);
-        this.number = number;
+        this.id = id;
         flag1 = false;
         flag2 = false;
     }
@@ -38,20 +38,20 @@ public class Rule {
         this.consequent = consequent;
     }
 
-    public List<String> getAntecedents() {
+    public List<Antecedent> getAntecedents() {
         return antecedents;
     }
 
-    public void setAntecedents(List<String> antecedents) {
+    public void setAntecedents(List<Antecedent> antecedents) {
         this.antecedents = antecedents;
     }
 
-    public int getNumber() {
-        return number;
+    public int getId() {
+        return id;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setId(int number) {
+        this.id = number;
     }
 
     public Boolean getFlag1() {
@@ -73,9 +73,9 @@ public class Rule {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("R").append(Integer.toString(number)).append(": ");
-        for(String anc : antecedents) {
-            sb.append(anc).append(", ");
+        sb.append("R").append(Integer.toString(id)).append(": ");
+        for(Antecedent anc : antecedents) {
+            sb.append(anc.getName()).append(", ");
         }
         sb.delete(sb.lastIndexOf(", "), sb.length());
         sb.append(" -> ").append(consequent);
@@ -89,11 +89,11 @@ public class Rule {
         {
             if (i != antecedents.size() - 1)
             {
-                result.append(antecedents.get(i) + ", ");
+                result.append(antecedents.get(i).getName() + ", ");
             }
             else
             {
-                result.append(antecedents.get(i));
+                result.append(antecedents.get(i).getName());
             }
         }
         return result.toString();

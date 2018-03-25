@@ -18,7 +18,14 @@ public class RESTClient {
     public RESTClient (){
 
     }
-
+    public String send(Data data){
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target("http://localhost:8080/rest/post/chaining");
+        Invocation.Builder builder = target.request(MediaType.APPLICATION_XML);
+        Response response = builder.post(Entity.xml(data));
+        String responseXML = response.readEntity(String.class);
+        return responseXML;
+    }
     public AbstractChaining sendPOSTRequest(Data data) {
         if (data == null ||
                 data.getChainingType() == null ||
@@ -30,7 +37,7 @@ public class RESTClient {
             return new AbstractChaining();
         }
         Client client = ClientBuilder.newClient();
-        WebTarget target = client.target("http://localhost:8080/rest_chaining_algorithms_war_exploded/rest/post/chaining");
+        WebTarget target = client.target("http://localhost:8080/rest/post/chaining");
         Invocation.Builder builder = target.request(MediaType.APPLICATION_XML);
         Response response = builder.post(Entity.xml(data));
         String responseXML = response.readEntity(String.class);

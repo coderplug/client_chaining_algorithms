@@ -66,7 +66,7 @@ public class Result implements Serializable {
         StringBuilder stringBuilder = new StringBuilder();
         String delim = "";
         for (Rule rule : ruleSequence) {
-            stringBuilder.append(delim).append("R" + rule.getNumber());
+            stringBuilder.append(delim).append("R" + rule.getId());
             delim = ", ";
         }
         if(ruleSequence.size() == 0 ){
