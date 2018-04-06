@@ -2,6 +2,7 @@ package data;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.inject.Named;
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.*;

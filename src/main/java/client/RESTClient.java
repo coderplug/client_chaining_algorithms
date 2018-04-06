@@ -7,6 +7,7 @@ import xml_service.XMLMarshallingService;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.inject.Named;
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -35,7 +36,7 @@ public class RESTClient {
                 data.getChainingType().isEmpty() ||
                 data.getGoal().isEmpty()
                 ) {
-            return new AbstractChaining();
+            return null;
         }
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target("http://185.80.130.228:8080/rest_chaining_algorithms_war_exploded/rest/post/chaining");//"http://localhost:8080/rest/post/chaining");
