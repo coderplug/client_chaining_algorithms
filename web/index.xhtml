@@ -34,7 +34,7 @@
             <p:commandButton update="grid" onclick="p('resultPanel').show()" actionListener="#{data.formFacts()}" value="Retrieve result"/>
 
             <h:panelGrid id="resultPanel" rendered="#{data.factsFormed}">
-                <p:inputTextarea name="requestResult" id="requestResult" rows="6" cols="50" readonly="true" value="#{rESTClient.sendPOSTRequest(data)}" />
+                <p:inputTextarea name="requestResult" id="requestResult" rows="6" cols="60" readonly="false" value="#{rESTClient.sendPOSTRequest(data)}" />
             </h:panelGrid>
 
         </h:form>

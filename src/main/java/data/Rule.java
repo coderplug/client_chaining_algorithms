@@ -13,6 +13,9 @@ public class Rule {
     @XmlElementWrapper(name = "antecedents")
     @XmlElement(name = "antecedent")
     private List<Antecedent> antecedents;
+
+    private String server;
+
     private int id;
     private Boolean flag1;
     private Boolean flag2;
@@ -28,6 +31,14 @@ public class Rule {
         this.id = id;
         flag1 = false;
         flag2 = false;
+    }
+
+    public String getServer() {
+        return server;
+    }
+
+    public void setServer(String server) {
+        this.server = server;
     }
 
     public String getConsequent() {
@@ -79,6 +90,7 @@ public class Rule {
         }
         sb.delete(sb.lastIndexOf(", "), sb.length());
         sb.append(" -> ").append(consequent);
+        sb.append(" from ").append(server);
         return sb.toString();
     }
 
