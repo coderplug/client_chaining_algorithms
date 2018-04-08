@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.*;
 import java.util.LinkedList;
 import java.util.List;
 
-@XmlRootElement
+@XmlRootElement //Shows that this object can be converted to XML
 @XmlAccessorType(XmlAccessType.FIELD) //Needed to show List values correctly
 public class Rule {
 

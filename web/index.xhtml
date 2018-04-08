@@ -10,31 +10,32 @@
     <f:view transient="true">
         <h:form id="dataForm">
             <h:panelGrid id="grid" columns="3">
-
+                <!--Chaining type-->
                 <p:outputLabel for="chaining" value="Chaining" />
                 <p:selectOneMenu id="chaining" value="#{data.chainingType}" required="true" style="width:125px">
                     <f:selectItem itemLabel="Forward" itemValue="forward" />
                     <f:selectItem itemLabel="Backward" itemValue="backward" />
                 </p:selectOneMenu>
                 <p:message for="chaining" display="icon" />
-
+                <!--Goal-->
                 <p:outputLabel for="goal" value="Goal"/>
                 <p:inputText id="goal" value="#{data.goal}"
                              required="true" p:type="text"
                              p:placeholder="Enter goal"/>
                 <p:message for="goal" display="icon" />
-
+                <!--Facts-->
                 <p:outputLabel for="facts" value="Facts"/>
                 <p:inputText id="facts" type="text" required="true"
                               placeholder="Enter facts (use ',')" value="#{data.factsString}"/>
                 <p:message for="facts" display="icon" />
 
             </h:panelGrid>
-
+            <!--Button "Retrieve Result"-->
             <p:commandButton update="grid" onclick="p('resultPanel').show()" actionListener="#{data.formFacts()}" value="Retrieve result"/>
 
+            <!--Result area-->
             <h:panelGrid id="resultPanel" rendered="#{data.factsFormed}">
-                <p:inputTextarea name="requestResult" id="requestResult" rows="6" cols="60" readonly="false" value="#{rESTClient.sendPOSTRequest(data)}" />
+                <p:inputTextarea name="requestResult" id="requestResult" rows="6" cols="60" readonly="true" value="#{rESTClient.sendPOSTRequest(data)}" />
             </h:panelGrid>
 
         </h:form>

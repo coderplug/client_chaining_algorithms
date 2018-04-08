@@ -5,8 +5,8 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
-@XmlRootElement(name = "trace")
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "trace") //Shows that this object can be converted to XML
+@XmlAccessorType(XmlAccessType.FIELD) //Needed to show List values correctly
 public class Trace implements Serializable {
 
     @XmlElementWrapper(name = "trace_list")

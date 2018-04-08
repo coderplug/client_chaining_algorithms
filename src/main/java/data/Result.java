@@ -5,13 +5,13 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
-@XmlRootElement(name = "result")
+@XmlRootElement(name = "result") //Shows that this object can be converted to XML
 @XmlAccessorType(XmlAccessType.FIELD) //Needed to show List values correctly
 public class Result implements Serializable {
     private Boolean goalReached;
 
-    @XmlElementWrapper(name = "rule_sequence")
-    @XmlElement(name = "rule")
+    @XmlElementWrapper(name = "rule_sequence") //XML parent node
+    @XmlElement(name = "rule") //XML children node
     private List<Rule> ruleSequence;
 
     @XmlTransient  //Used to avoid when creating xml file
@@ -62,6 +62,8 @@ public class Result implements Serializable {
     public List<Rule> getRuleSequence() {
         return ruleSequence;
     }
+
+    //Builds result path
     public String getRuleSequenceString(){
         StringBuilder stringBuilder = new StringBuilder();
         String delim = "";

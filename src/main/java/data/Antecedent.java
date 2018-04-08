@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Objects;
 
-@XmlRootElement
+@XmlRootElement //Shows that this object can be converted to XML
 @XmlAccessorType(XmlAccessType.FIELD) //Needed to show List values correctly
 public class Antecedent {
 
@@ -13,6 +13,7 @@ public class Antecedent {
 
     private String name;
 
+    //Multi-DB variable
     private String server;
 
     public Long getId() {

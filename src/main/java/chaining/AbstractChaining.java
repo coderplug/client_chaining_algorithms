@@ -12,14 +12,20 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
-@XmlRootElement(name = "chainingQuery", namespace="")
-@ManagedBean
-@RequestScoped
+/*
+ Main chaining class, stores query data
+ */
+
+@XmlRootElement(name = "chainingQuery", namespace="") //Annotation used to show how object looks like in xml
+@ManagedBean //CDI manages this class objects
+@RequestScoped //Object lives only during request
 public class AbstractChaining implements Serializable {
 
+    //XML ignores this
     @XmlTransient
     private static String NL = System.getProperty("line.separator");
 
+    //XML ignores this
     @XmlTransient
     private List<String> facts;
 

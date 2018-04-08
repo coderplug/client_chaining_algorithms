@@ -7,19 +7,22 @@ import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.*;
 
-@XmlRootElement(name = "data")
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "data") //Shows that this object can be converted to XML
+@XmlAccessorType(XmlAccessType.FIELD) //Must for XML creation
 @ManagedBean
 @RequestScoped
 public class Data implements Serializable {
 
     private String chainingType;
     private String goal;
+
+    //Variable used to find out if variable "facts" is updated
     private Boolean factsFormed;
+    //Facts string, prelist
     private String factsString;
 
-    @XmlElementWrapper(name = "facts")
-    @XmlElement(name = "fact")
+    @XmlElementWrapper(name = "facts") //List parent node
+    @XmlElement(name = "fact") //List children node
     private List<String> facts;
 
     public Data(){
@@ -105,11 +108,15 @@ public class Data implements Serializable {
         //String factsString = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("dataForm:facts");
         if (factsString != null)
         {
+            //Regex, splits string to facts array
             String[] factsArray = factsString.split("[\\s]*,[\\s]*");
 
+            //Array to Set
             Set<String> factsSet = new LinkedHashSet<>(Arrays.asList(factsArray));
 
             factsFormed = true;
+
+            //Set to List
             LinkedList factsList = new LinkedList(factsSet);
             setFacts(factsList);
         }
