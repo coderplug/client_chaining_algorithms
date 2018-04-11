@@ -3,7 +3,9 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-<h:head><title>Chaining algorithms</title></h:head>
+<h:head>
+    <title>Chaining algorithms</title>
+</h:head>
 <h:body>
     <h1>Chaining algorithms</h1>
     <p:tooltip />
@@ -28,11 +30,9 @@
                 <p:inputText id="facts" type="text" required="true"
                               placeholder="Enter facts (use ',')" value="#{data.factsString}"/>
                 <p:message for="facts" display="icon" />
-
             </h:panelGrid>
             <!--Button "Retrieve Result"-->
             <p:commandButton update="grid" onclick="p('resultPanel').show()" actionListener="#{data.formFacts()}" value="Retrieve result"/>
-
             <!--Result area-->
             <h:panelGrid id="resultPanel" rendered="#{data.factsFormed}">
                 <p:inputTextarea name="requestResult" id="requestResult" rows="6" cols="60" readonly="true" value="#{rESTClient.sendPOSTRequest(data)}" />
