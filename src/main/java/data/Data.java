@@ -13,6 +13,10 @@ import java.util.*;
 @RequestScoped
 public class Data implements Serializable {
 
+    @XmlElementWrapper(name = "databases") //List parent node
+    @XmlElement(name = "database") //List children node
+    private List<String> databases;
+
     private String chainingType;
     private String goal;
 
@@ -27,14 +31,24 @@ public class Data implements Serializable {
 
     public Data(){
         facts = new LinkedList<>();
+        databases = new LinkedList<>();
         factsFormed = false;
     }
 
-    public Data(String goal, List<String> facts, String chainingType) {
+    public Data(String goal, List<String> facts, String chainingType, List<String> databases) {
         this.goal = goal;
         this.facts = facts;
         this.chainingType = chainingType;
+        this.databases = databases;
         factsFormed = false;
+    }
+
+    public List<String> getDatabases() {
+        return databases;
+    }
+
+    public void setDatabases(List<String> databases) {
+        this.databases = databases;
     }
 
     public String getFactsString() {

@@ -12,6 +12,15 @@
     <f:view transient="true">
         <h:form id="dataForm">
             <h:panelGrid id="grid" columns="3">
+
+                <p:outputLabel for="databases" value="Databases" />
+                <p:selectManyCheckbox id="databases" value="#{data.databases}">
+                    <f:selectItem itemLabel="Local 1" itemValue="local1" />
+                    <f:selectItem itemLabel="Local 2" itemValue="local2" />
+                    <f:selectItem itemLabel="Remote 1" itemValue="remote1" />
+                    <f:selectItem itemLabel="Remote 2" itemValue="remote2" />
+                </p:selectManyCheckbox>
+                <p:message for="databases" display="icon" />
                 <!--Chaining type-->
                 <p:outputLabel for="chaining" value="Chaining" />
                 <p:selectOneMenu id="chaining" value="#{data.chainingType}" required="true" style="width:125px">
@@ -36,6 +45,11 @@
             <!--Result area-->
             <h:panelGrid id="resultPanel" rendered="#{data.factsFormed}">
                 <p:inputTextarea name="requestResult" id="requestResult" rows="6" cols="60" readonly="true" value="#{rESTClient.sendPOSTRequest(data)}" />
+                <p:resizable for="requestResult" />
+                XML:
+                <p:inputTextarea name="requestXML" id="requestXML" rows="6" cols="60" readonly="true" value="#{rESTClient.responseXML}" />
+                <p:resizable for="requestXML" />
+
             </h:panelGrid>
 
         </h:form>

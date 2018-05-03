@@ -43,7 +43,7 @@ public class Result implements Serializable {
         else
         {
             stringBuilder.append("  1) Goal " + data.getGoal() + " achieved.").append(NL);
-            stringBuilder.append("  2) Path: " + getRuleSequenceString() + ".");
+            stringBuilder.append("  2) Path: " + getRuleSequenceString());
         }
         return stringBuilder.toString();
     }
@@ -68,7 +68,7 @@ public class Result implements Serializable {
         StringBuilder stringBuilder = new StringBuilder();
         String delim = "";
         for (Rule rule : ruleSequence) {
-            stringBuilder.append(delim).append("R" + rule.getId());
+            stringBuilder.append(delim).append(rule.getServer()+".R" + rule.getId());
             delim = ", ";
         }
         if(ruleSequence.size() == 0 ){

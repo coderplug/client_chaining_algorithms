@@ -7,11 +7,14 @@ import xml_service.XMLMarshallingService;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.xml.bind.JAXBElement;
 import java.io.Serializable;
+import java.util.Map;
 
 /*
  RESTClient,
@@ -24,17 +27,27 @@ import java.io.Serializable;
 @RequestScoped //Lives only during request
 public class RESTClient implements Serializable {
 
+    private String responseXML;
 
     public RESTClient (){
 
     }
+
+    public String getResponseXML() {
+        return responseXML;
+    }
+
+    public void setResponseXML(String responseXML) {
+        this.responseXML = responseXML;
+    }
+
     public String send(Data data){
 
         //REST client, JAX-RS takes care of object creation
         Client client = ClientBuilder.newClient();
 
         //Sets REST server
-        WebTarget target = client.target("http://185.80.130.228:8080/rest_chaining_algorithms_war_exploded/rest/post/chaining");
+        WebTarget target = client.target("http://185.80.130.228:8080/rest/post/chaining");
         //WebTarget target = client.target("http://localhost:8080/rest/post/chaining");
 
         //Creates request builder, which uses XML to communicate
@@ -42,7 +55,7 @@ public class RESTClient implements Serializable {
 
         //Sends and receives data from REST server
         Response response = builder.post(Entity.xml(data));
-        String responseXML = response.readEntity(String.class);
+        responseXML = response.readEntity(String.class);
         return responseXML;
     }
     public AbstractChaining sendPOSTRequest(Data data) {
@@ -61,7 +74,7 @@ public class RESTClient implements Serializable {
         Client client = ClientBuilder.newClient();
 
         //Sets REST server location
-        WebTarget target = client.target("http://185.80.130.228:8080/rest_chaining_algorithms_war_exploded/rest/post/chaining");
+        WebTarget target = client.target("http://185.80.130.228:8080/rest/post/chaining");
         //WebTarget target = client.target("http://localhost:8080/rest/post/chaining");
 
         //Creates request builder, which uses XML to communicate
@@ -69,7 +82,7 @@ public class RESTClient implements Serializable {
 
         //Sends and receives data from REST server
         Response response = builder.post(Entity.xml(data));
-        String responseXML = response.readEntity(String.class);
+        responseXML = response.readEntity(String.class);
 
         //Creates XML marshalling service which works with AbstractChaining class
         XMLMarshallingService service = new XMLMarshallingService(AbstractChaining.class);
@@ -77,6 +90,7 @@ public class RESTClient implements Serializable {
 
         //Data object is not sent by REST server so it is set here
         chaining.getResult().setData(data);
+
         return chaining;
     }
 }
