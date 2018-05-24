@@ -12,8 +12,7 @@
     <f:view transient="true">
         <h:form id="dataForm">
             <h:panelGrid id="grid" columns="3">
-
-                <p:outputLabel for="databases" value="Databases" />
+                <p:outputLabel for="databases" value="Databases: " />
                 <p:selectManyCheckbox id="databases" value="#{data.databases}">
                     <f:selectItem itemLabel="Local 1" itemValue="local1" />
                     <f:selectItem itemLabel="Local 2" itemValue="local2" />

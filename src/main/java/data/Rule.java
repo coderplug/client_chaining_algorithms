@@ -1,23 +1,38 @@
 package data;
 
+//JAXB importavimas
 import javax.xml.bind.annotation.*;
+
 import java.util.LinkedList;
 import java.util.List;
 
-@XmlRootElement //Shows that this object can be converted to XML
-@XmlAccessorType(XmlAccessType.FIELD) //Needed to show List values correctly
+//Nurodoma, jog galima dirbti su XML dokumentais
+@XmlRootElement(name = "result")
+//Reikalinga sąrašo reikšmėms XML dokumente ir konvertuojant atvaizduoti
+@XmlAccessorType(XmlAccessType.FIELD)
+//Taisyklės
 public class Rule {
 
+    //Taisyklės rezultatas - konsekventas
     private String consequent;
 
+    //Tėvinė sąrašo XML žymė
     @XmlElementWrapper(name = "antecedents")
+    //Vaikinė sąrašo XML žymė
     @XmlElement(name = "antecedent")
+    //Taisyklės antecedentų (sąlygų) sąrašas
     private List<Antecedent> antecedents;
 
+    //Taisyklės serveris
     private String server;
 
+    //ID
     private int id;
+
+    //Ar panaudota taisyklė
     private Boolean flag1;
+
+    //Ar taisyklės rezultatas egzistuoja faktuose
     private Boolean flag2;
 
     //Empty is needed to generate XML
@@ -94,7 +109,7 @@ public class Rule {
         return sb.toString();
     }
 
-    //Used for listing risk conditions in result string
+    //Sąlygų atvaizdavimas tekstu
     public String listAntecedents() {
         StringBuilder result = new StringBuilder();
         for(int i=0; i<antecedents.size(); i++)

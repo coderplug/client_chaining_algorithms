@@ -1,20 +1,26 @@
 package data;
 
+//JAXB importavimas
 import javax.xml.bind.annotation.*;
+
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
-@XmlRootElement(name = "trace") //Shows that this object can be converted to XML
-@XmlAccessorType(XmlAccessType.FIELD) //Needed to show List values correctly
+//Nurodoma, jog galima dirbti su XML dokumentais
+@XmlRootElement(name = "result")
+//Reikalinga sąrašo reikšmėms XML dokumente ir konvertuojant atvaizduoti
+@XmlAccessorType(XmlAccessType.FIELD)
+//Žingsnių atvaizdavimas
 public class Trace implements Serializable {
 
+    //Tėvinė sąrašo XML žymė
     @XmlElementWrapper(name = "trace_list")
+    //Vaikinė sąrašo XML žymė
     @XmlElement(name = "line")
+    //Žingsnių sąrašas
     private List<String> traceList;
 
-    @XmlTransient
-    private List<String> strings;
     public Trace(){
         traceList = new LinkedList<>();
     }
@@ -29,7 +35,6 @@ public class Trace implements Serializable {
 
     public Trace(List<String> traceList) {
         this.traceList = traceList;
-        this.strings = new LinkedList<>();
     }
 
     public List<String> getTraceList() {

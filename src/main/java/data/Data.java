@@ -1,32 +1,47 @@
 package data;
 
+//CDI anotacijos
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.inject.Named;
+
+//JAXB importavimas
 import javax.xml.bind.annotation.*;
+
 import java.io.Serializable;
 import java.util.*;
 
-@XmlRootElement(name = "data") //Shows that this object can be converted to XML
-@XmlAccessorType(XmlAccessType.FIELD) //Must for XML creation
+//Parodoma, jog objektas gali būti konvertuojamas į XML elementą
+@XmlRootElement(name = "data")
+//Reikalinga XML sąrašų atvaizdavimui XML dokumente
+@XmlAccessorType(XmlAccessType.FIELD)
+//Gyvavimo trukmė valdoma CDI
 @ManagedBean
+//Gyvavimo trukmė - užklausa
 @RequestScoped
 public class Data implements Serializable {
 
-    @XmlElementWrapper(name = "databases") //List parent node
-    @XmlElement(name = "database") //List children node
+    //Tėvinis sąrašo XML elementas
+    @XmlElementWrapper(name = "databases")
+    //Vaikinis sąrašo XML elementas
+    @XmlElement(name = "database")
+    //DB sąrašas
     private List<String> databases;
 
+    //Išvedimo tipas
     private String chainingType;
+
+    //Išvedimo tikslas
     private String goal;
 
-    //Variable used to find out if variable "facts" is updated
+    //Naudojamas tikrinti ar faktai konvertuoti iš lauko reikšmės interfeise
     private Boolean factsFormed;
-    //Facts string, prelist
+
+    //Faktų sąrašas tekstiniu formatu
     private String factsString;
 
     @XmlElementWrapper(name = "facts") //List parent node
     @XmlElement(name = "fact") //List children node
+    //Konvertuoti faktai
     private List<String> facts;
 
     public Data(){
@@ -101,7 +116,7 @@ public class Data implements Serializable {
                 "     " + goal;
     }
 
-    //Used for listing facts in result string
+    //Sąrašų atvaizdavimas tekstu
     private String listFacts() {
         StringBuilder result = new StringBuilder();
         for(int i=0; i<facts.size(); i++)
@@ -118,19 +133,19 @@ public class Data implements Serializable {
         return result.toString();
     }
 
+    //Faktų formavimas
     public void formFacts() {
-        //String factsString = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("dataForm:facts");
         if (factsString != null)
         {
-            //Regex, splits string to facts array
+            //Regex, padalinantis pagal kablelius string tekstą į maxyvą
             String[] factsArray = factsString.split("[\\s]*,[\\s]*");
 
-            //Array to Set
+            //Masyvas paverčiamas į rinkinį
             Set<String> factsSet = new LinkedHashSet<>(Arrays.asList(factsArray));
 
             factsFormed = true;
 
-            //Set to List
+            //Rinkinys pavečiamas į sąrašą
             LinkedList factsList = new LinkedList(factsSet);
             setFacts(factsList);
         }

@@ -5,15 +5,16 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Objects;
 
-@XmlRootElement //Shows that this object can be converted to XML
-@XmlAccessorType(XmlAccessType.FIELD) //Needed to show List values correctly
+//Naudojamas konvertavimui į XML dokumentą
+@XmlRootElement
+//Naudojamas sąrašo elementų konvertavimui į XML
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Antecedent {
 
     private Long id;
 
     private String name;
 
-    //Multi-DB variable
     private String server;
 
     public Long getId() {

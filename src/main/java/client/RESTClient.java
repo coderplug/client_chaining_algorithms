@@ -5,28 +5,31 @@ import chaining.AbstractChaining;
 import data.Data;
 import xml_service.XMLMarshallingService;
 
+//CDI importavimai
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
-import javax.inject.Named;
+
+//JAX-RS importavimai
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.xml.bind.JAXBElement;
+
 import java.io.Serializable;
-import java.util.Map;
 
 /*
  RESTClient,
- Input: Data object as XML
- Action: Sends and accepts information from REST server
- Result: Received information sent by REST server
+ Įeiga: Duomenų objektas XML formatu
+ Veiksmas: Siųsti ir priimti informaciją iš REST serverio
+ Rezultatas: Priimta ir apdorota REST serverio informacija
  */
 
-@ManagedBean //CDI takes care of this class lifetime
-@RequestScoped //Lives only during request
+//CDI pasirūpina klasės gyvavimo ciklu
+@ManagedBean
+//Gyvavimo ciklas trunka užklausą
+@RequestScoped
 public class RESTClient implements Serializable {
 
+    //Atsako XML, naudojamas kliento interfeise
     private String responseXML;
 
     public RESTClient (){
@@ -43,23 +46,25 @@ public class RESTClient implements Serializable {
 
     public String send(Data data){
 
-        //REST client, JAX-RS takes care of object creation
+        //REST klientas, JAX-RS pasirūpina jo kūrimu
         Client client = ClientBuilder.newClient();
 
-        //Sets REST server
-        WebTarget target = client.target("http://185.80.130.228:8080/rest/post/chaining");
-        //WebTarget target = client.target("http://localhost:8080/rest/post/chaining");
+        //Nustatomas REST klientas
+        //WebTarget target = client.target("http://185.80.130.228:8080/rest/post/chaining");
+        WebTarget target = client.target("http://localhost:8080/rest/post/chaining");
 
-        //Creates request builder, which uses XML to communicate
+        //Sukūriamas užklausų kūrimo objektas, skirtas bendravimui XML formatu
         Invocation.Builder builder = target.request(MediaType.APPLICATION_XML);
 
-        //Sends and receives data from REST server
+        //Siunčia ir priima informaciją REST klientu
         Response response = builder.post(Entity.xml(data));
+
+        //Gautas XML dokumentas
         responseXML = response.readEntity(String.class);
         return responseXML;
     }
     public AbstractChaining sendPOSTRequest(Data data) {
-        //Validation used to avoid empty mandatory field values
+        //Validacija naudojama patikrinti privalomus laukus
         if (data == null ||
                 data.getChainingType() == null ||
                 data.getGoal() == null ||
@@ -70,25 +75,29 @@ public class RESTClient implements Serializable {
             return null;
         }
 
-        //REST client, JAX-RS takes care of object creation
+        //REST klientas, JAX-RS pasirūpina jo kūrimu
         Client client = ClientBuilder.newClient();
 
-        //Sets REST server location
-        WebTarget target = client.target("http://185.80.130.228:8080/rest/post/chaining");
-        //WebTarget target = client.target("http://localhost:8080/rest/post/chaining");
+        //Nustatomas REST klientas
+        //WebTarget target = client.target("http://185.80.130.228:8080/rest/post/chaining");
+        WebTarget target = client.target("http://localhost:8080/rest/post/chaining");
 
-        //Creates request builder, which uses XML to communicate
+        //Sukūriamas užklausų kūrimo objektas, skirtas bendravimui XML formatu
         Invocation.Builder builder = target.request(MediaType.APPLICATION_XML);
 
-        //Sends and receives data from REST server
+        //Siunčia ir priima informaciją REST klientu
         Response response = builder.post(Entity.xml(data));
+
+        //Gautas XML dokumentas
         responseXML = response.readEntity(String.class);
 
-        //Creates XML marshalling service which works with AbstractChaining class
+        //Sukuria XML marshalling servisą, skirtą darbui su AbstractChaining klase
         XMLMarshallingService service = new XMLMarshallingService(AbstractChaining.class);
+
+        //Iš XML dokuemnto sukuriamas AbstractChaining objektas
         AbstractChaining chaining = (AbstractChaining) service.unmarshal(responseXML);
 
-        //Data object is not sent by REST server so it is set here
+        //Data objektas priskiriamas sukurtam AbstractChaining, nesiunčiamas serviso
         chaining.getResult().setData(data);
 
         return chaining;

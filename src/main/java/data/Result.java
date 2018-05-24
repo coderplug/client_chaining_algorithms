@@ -1,20 +1,31 @@
 package data;
 
+//JAXB importavimas
 import javax.xml.bind.annotation.*;
+
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
-@XmlRootElement(name = "result") //Shows that this object can be converted to XML
-@XmlAccessorType(XmlAccessType.FIELD) //Needed to show List values correctly
+//Nurodoma, jog galima dirbti su XML dokumentais
+@XmlRootElement(name = "result")
+//Reikalinga sąrašo reikšmėms XML dokumente ir konvertuojant atvaizduoti
+@XmlAccessorType(XmlAccessType.FIELD)
+//Užklausos rezultatas
 public class Result implements Serializable {
+    //Ar pasiektas tikslas
     private Boolean goalReached;
 
-    @XmlElementWrapper(name = "rule_sequence") //XML parent node
-    @XmlElement(name = "rule") //XML children node
+    //Tėvinė sąrašo XML žymė
+    @XmlElementWrapper(name = "rule_sequence")
+    //Vaikinė sąrašo XML žymė
+    @XmlElement(name = "rule")
+    //Taisyklių rezultatui atvaizduoti seka
     private List<Rule> ruleSequence;
 
-    @XmlTransient  //Used to avoid when creating xml file
+    //Nenaudojamas darbui su XML dokumentais
+    @XmlTransient
+    //Užklausos metu suformuoti duomenys
     private Data data;
 
     public Result(){
@@ -63,7 +74,7 @@ public class Result implements Serializable {
         return ruleSequence;
     }
 
-    //Builds result path
+    //Taisyklių sąrašo atvaizdavimas tekstu
     public String getRuleSequenceString(){
         StringBuilder stringBuilder = new StringBuilder();
         String delim = "";

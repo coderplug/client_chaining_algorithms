@@ -16,16 +16,19 @@ import java.util.List;
  Main chaining class, stores query data
  */
 
-@XmlRootElement(name = "chainingQuery", namespace="") //Annotation used to show how object looks like in xml
-@ManagedBean //CDI manages this class objects
-@RequestScoped //Object lives only during request
+//Aprašomas objekto XML elemntas
+@XmlRootElement(name = "chainingQuery", namespace="")
+//CDI valdo šios klasės objektus
+@ManagedBean
+//Objekto gyvavimo ciklas yra užklausos metu
+@RequestScoped
+//Užklausos informacija (pradiniai duomenys, vykdymo žingsniai ir rezultatas)
 public class AbstractChaining implements Serializable {
 
-    //XML ignores this
+    //XML dokumento kūrime šis laukas ignoruojamas
     @XmlTransient
     private static String NL = System.getProperty("line.separator");
 
-    //XML ignores this
     @XmlTransient
     private List<String> facts;
 
@@ -76,7 +79,7 @@ public class AbstractChaining implements Serializable {
         this.facts = facts;
     }
 
-    //Used for listing facts in result string
+    //Faktų atvaizdavimas tekstiniu formatu
     public String listFacts() {
         StringBuilder result = new StringBuilder();
         for(int i=0; i<facts.size(); i++)
