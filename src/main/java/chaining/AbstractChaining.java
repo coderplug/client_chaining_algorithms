@@ -101,8 +101,8 @@ public class AbstractChaining implements Serializable {
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append("PART 1. Data").append(NL).append(NL);
-        if (result != null && result.getData() != null) {
-            stringBuilder.append(result.getData()).append(NL).append(NL);
+        if (data != null && data != null) {
+            stringBuilder.append(data).append(NL).append(NL);
         }
         stringBuilder.append("PART 2. Trace").append(NL).append(NL);
         stringBuilder.append(trace).append(NL).append(NL);

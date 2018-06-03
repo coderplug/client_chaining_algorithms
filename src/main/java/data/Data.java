@@ -39,6 +39,10 @@ public class Data implements Serializable {
     //Faktų sąrašas tekstiniu formatu
     private String factsString;
 
+    @XmlElementWrapper(name = "rules")
+    @XmlElement(name = "rule")
+    private List<Rule> rules;
+
     @XmlElementWrapper(name = "facts") //List parent node
     @XmlElement(name = "fact") //List children node
     //Konvertuoti faktai
@@ -113,7 +117,25 @@ public class Data implements Serializable {
         return "  1) Facts" + NL +
                 "     " + listFacts() + NL + NL +
                 "  2) Goal" + NL +
-                "     " + goal;
+                "     " + goal + NL + NL +
+                "  3) Rules" + NL +
+                "     " + listRules() + NL;
+    }
+
+    private String listRules() {
+        StringBuilder builder = new StringBuilder();
+        for(int i=0; i<rules.size(); i++)
+        {
+            if (i != rules.size() - 1)
+            {
+                builder.append(rules.get(i).toString() + ", ");
+            }
+            else
+            {
+                builder.append(rules.get(i).toString());
+            }
+        }
+        return builder.toString();
     }
 
     //Sąrašų atvaizdavimas tekstu

@@ -79,8 +79,8 @@ public class RESTClient implements Serializable {
         Client client = ClientBuilder.newClient();
 
         //Nustatomas REST klientas
-        //WebTarget target = client.target("http://185.80.130.228:8080/rest/post/chaining");
-        WebTarget target = client.target("http://localhost:8080/rest/post/chaining");
+        //WebTarget target = client.target("http://185.80.130.228:8080/rest/post/chaining"); //Nutolęs servisas
+        WebTarget target = client.target("http://localhost:8080/rest/post/chaining"); //Lokalus servisas
 
         //Sukūriamas užklausų kūrimo objektas, skirtas bendravimui XML formatu
         Invocation.Builder builder = target.request(MediaType.APPLICATION_XML);

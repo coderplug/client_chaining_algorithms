@@ -99,13 +99,16 @@ public class Rule {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("R").append(Integer.toString(id)).append(": ");
+        if (server == null || antecedents.size() == 0 || consequent == null)
+        {
+            return "something wrong";
+        }
+        sb.append(server).append(".R").append(Integer.toString(id)).append(": ");
         for(Antecedent anc : antecedents) {
             sb.append(anc.getName()).append(", ");
         }
         sb.delete(sb.lastIndexOf(", "), sb.length());
         sb.append(" -> ").append(consequent);
-        sb.append(" from ").append(server);
         return sb.toString();
     }
 

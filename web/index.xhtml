@@ -12,12 +12,27 @@
     <f:view transient="true">
         <h:form id="dataForm">
             <h:panelGrid id="grid" columns="3">
+                <!--Databases-->
                 <p:outputLabel for="databases" value="Databases: " />
                 <p:selectManyCheckbox id="databases" value="#{data.databases}">
-                    <f:selectItem itemLabel="Local 1" itemValue="local1" />
+                    <f:selectItem itemLabel="B1" itemValue="B1" />
+                    <f:selectItem itemLabel="B2" itemValue="B2" />
+                    <f:selectItem itemLabel="B3" itemValue="B3" />
+                    <f:selectItem itemLabel="B4" itemValue="B4" />
+                    <f:selectItem itemLabel="B5" itemValue="B5" />
+                    <f:selectItem itemLabel="B6" itemValue="B6" />
+                    <f:selectItem itemLabel="B7" itemValue="B7" />
+                    <f:selectItem itemLabel="B8" itemValue="B8" />
+                    <f:selectItem itemLabel="B9" itemValue="B9" />
+                    <f:selectItem itemLabel="F1" itemValue="F1" />
+                    <f:selectItem itemLabel="F2" itemValue="F2" />
+                    <f:selectItem itemLabel="F3" itemValue="F3" />
+                    <f:selectItem itemLabel="F4" itemValue="F4" />
+                    <f:selectItem itemLabel="F5" itemValue="F5" />
+                    <!--<f:selectItem itemLabel="Local 1" itemValue="local1" />
                     <f:selectItem itemLabel="Local 2" itemValue="local2" />
                     <f:selectItem itemLabel="Remote 1" itemValue="remote1" />
-                    <f:selectItem itemLabel="Remote 2" itemValue="remote2" />
+                    <f:selectItem itemLabel="Remote 2" itemValue="remote2" />-->
                 </p:selectManyCheckbox>
                 <p:message for="databases" display="icon" />
                 <!--Chaining type-->
